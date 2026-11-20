@@ -1,0 +1,13 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: jarvisfire
+      POSTGRES_USER: jarvisfire
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in environment}
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - jarvisfire_pg:/var/lib/postgresql/data
+volumes:
+  jarvisfire_pg:
