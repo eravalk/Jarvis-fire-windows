@@ -1,0 +1,13 @@
+<Window x:Class="JarvisFire.Desktop.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="ДЖАРВИС FIRE — прототип" Width="1150" Height="720" Background="#15191E" Foreground="White" WindowStartupLocation="CenterScreen">
+<DockPanel Margin="24">
+<StackPanel DockPanel.Dock="Top" Margin="0,0,0,22"><TextBlock Text="ДЖАРВИС FIRE" FontSize="30" FontWeight="Bold" Foreground="#F14B46"/><TextBlock Text="Диспетчерская система · каркас интерфейса (не готова к эксплуатации)" FontSize="14" Foreground="#B6BEC8"/></StackPanel>
+<StackPanel DockPanel.Dock="Left" Width="230" Margin="0,0,20,0"><TextBlock Text="РАЗДЕЛЫ" Margin="0,0,0,16" FontWeight="Bold"/>
+<Button Content="Главная" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Главная"/>
+<Button Content="Вызовы" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Вызовы"/>
+<Button Content="Техника" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Техника"/>
+<Button Content="Карта" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Карта"/>
+<Button Content="Водоисточники" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Водоисточники"/>
+<Button Content="Архив" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Архив"/>
+</StackPanel>
+<Border Background="#252B33" CornerRadius="14" Padding="30"><StackPanel><TextBlock x:Name="SectionTitle" Text="Главная" FontSize="26" FontWeight="SemiBold"/><TextBlock Text="Раздел пока не реализован. Подключение к PostgreSQL, Android и диспетчерские функции отсутствуют." TextWrapping="Wrap" Foreground="#C5CBD2" Margin="0,18,0,0" FontSize="16"/></StackPanel></Border>
+</DockPanel></Window>
