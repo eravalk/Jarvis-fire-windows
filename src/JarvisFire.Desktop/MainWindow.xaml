@@ -1,13 +1,26 @@
-<Window x:Class="JarvisFire.Desktop.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="ДЖАРВИС FIRE — прототип" Width="1150" Height="720" Background="#15191E" Foreground="White" WindowStartupLocation="CenterScreen">
+<Window x:Class="JarvisFire.Desktop.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Title="ДЖАРВИС FIRE — прототип" Width="1180" Height="760" MinWidth="850" MinHeight="600" Background="#15191E" Foreground="White" WindowStartupLocation="CenterScreen">
+<Window.Resources>
+<Style TargetType="Button"><Setter Property="Background" Value="#343D47"/><Setter Property="Foreground" Value="White"/><Setter Property="BorderThickness" Value="0"/><Setter Property="Padding" Value="12,8"/></Style>
+<Style TargetType="TextBox"><Setter Property="Padding" Value="8"/><Setter Property="Margin" Value="0,4,0,10"/></Style>
+</Window.Resources>
 <DockPanel Margin="24">
-<StackPanel DockPanel.Dock="Top" Margin="0,0,0,22"><TextBlock Text="ДЖАРВИС FIRE" FontSize="30" FontWeight="Bold" Foreground="#F14B46"/><TextBlock Text="Диспетчерская система · каркас интерфейса (не готова к эксплуатации)" FontSize="14" Foreground="#B6BEC8"/></StackPanel>
-<StackPanel DockPanel.Dock="Left" Width="230" Margin="0,0,20,0"><TextBlock Text="РАЗДЕЛЫ" Margin="0,0,0,16" FontWeight="Bold"/>
+<StackPanel DockPanel.Dock="Top" Margin="0,0,0,22"><TextBlock Text="ДЖАРВИС FIRE" FontSize="30" FontWeight="Bold" Foreground="#F14B46"/><TextBlock Text="Диспетчерская система · тестовый прототип, НЕ для реальных вызовов" FontSize="14" Foreground="#B6BEC8"/></StackPanel>
+<StackPanel DockPanel.Dock="Left" Width="220" Margin="0,0,20,0"><TextBlock Text="РАЗДЕЛЫ" Margin="0,0,0,16" FontWeight="Bold"/>
 <Button Content="Главная" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Главная"/>
-<Button Content="Вызовы" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Вызовы"/>
+<Button Content="Вызовы (локально)" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Вызовы"/>
 <Button Content="Техника" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Техника"/>
 <Button Content="Карта" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Карта"/>
 <Button Content="Водоисточники" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Водоисточники"/>
 <Button Content="Архив" Height="42" Margin="0,0,0,8" Click="Section_Click" Tag="Архив"/>
 </StackPanel>
-<Border Background="#252B33" CornerRadius="14" Padding="30"><StackPanel><TextBlock x:Name="SectionTitle" Text="Главная" FontSize="26" FontWeight="SemiBold"/><TextBlock Text="Раздел пока не реализован. Подключение к PostgreSQL, Android и диспетчерские функции отсутствуют." TextWrapping="Wrap" Foreground="#C5CBD2" Margin="0,18,0,0" FontSize="16"/></StackPanel></Border>
+<Border Background="#252B33" CornerRadius="14" Padding="24">
+<Grid>
+<StackPanel x:Name="PlaceholderPanel"><TextBlock x:Name="SectionTitle" Text="Главная" FontSize="26" FontWeight="SemiBold"/><TextBlock Text="Раздел пока не реализован. PostgreSQL и Android не подключены." TextWrapping="Wrap" Foreground="#C5CBD2" Margin="0,18,0,0" FontSize="16"/></StackPanel>
+<Grid x:Name="IncidentsPanel" Visibility="Collapsed"><Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+<TextBlock Text="Журнал вызовов · локальная демонстрация" FontSize="24" FontWeight="SemiBold"/>
+<StackPanel Grid.Row="1" Margin="0,16,0,14"><TextBlock Text="Адрес"/><TextBox x:Name="AddressBox" MaxLength="300"/><TextBlock Text="Описание"/><TextBox x:Name="DescriptionBox" MaxLength="2000" Height="55" TextWrapping="Wrap" AcceptsReturn="True"/><StackPanel Orientation="Horizontal"><Button Content="Добавить тестовый вызов" Click="AddIncident_Click" Margin="0,0,10,0"/><Button Content="Закрыть выбранный" Click="CloseIncident_Click"/></StackPanel></StackPanel>
+<ListBox x:Name="IncidentList" Grid.Row="2" Background="#1B2026" Foreground="White" BorderThickness="0" DisplayMemberPath="DisplayText"/>
+</Grid>
+</Grid>
+</Border>
 </DockPanel></Window>
