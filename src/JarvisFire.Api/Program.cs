@@ -42,6 +42,18 @@ protectedApi.MapPost("/incidents", async (CreateIncident input, NpgsqlDataSource
     var id = (long)(await cmd.ExecuteScalarAsync(ct) ?? 0L);
     return Results.Created($"/api/v1/incidents/{id}", new { id });
 });
+// Development-only status update. Production must add role checks, concurrency control and audit logs.
+protectedApi.MapPatch("/incidents/{id:long}/status", async (long id, ChangeIncidentStatus input, NpgsqlDataSource db, CancellationToken ct) =>
+{
+    if (input.Status is not ("new" or "in_progress" or "closed"))
+        return Results.BadRequest(new { error = "Unsupported status" });
+    await using var cmd = db.CreateCommand("UPDATE incidents SET status = $1 WHERE id = $2 RETURNING id");
+    cmd.Parameters.AddWithValue(input.Status);
+    cmd.Parameters.AddWithValue(id);
+    var updated = await cmd.ExecuteScalarAsync(ct);
+    return updated is null ? Results.NotFound() : Results.Ok(new { id, status = input.Status });
+});
 app.Run();
 public sealed record CreateIncident(string Address, string? Description);
+public sealed record ChangeIncidentStatus(string Status);
 public sealed record IncidentDto(long Id, DateTime CreatedAt, string Address, string Description, string Status);
